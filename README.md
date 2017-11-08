@@ -16,31 +16,30 @@
 
 ![](https://raw.githubusercontent.com/inversify/inversify.github.io/master/img/cover.jpg)
 
-A powerful and lightweight inversion of control container for JavaScript & Node.js apps powered by TypeScript.
+一个由 TypeScript 为 Javascript 和 NodeJs 运行编写的功能强大且轻量级的控制反转容器.
 
-## About
-InversifyJS is a lightweight (4KB) inversion of control (IoC) container for TypeScript and JavaScript apps.
-An IoC container uses a class constructor to identify and inject its dependencies.
-InversifyJS has a friendly API and encourages the usage of the best OOP and IoC practices.
+## 介绍
+InversifyJS 是为 Typescript 和 Javascript 编写的一个控制反转 (IoC) 容器, 它仅有 4KB 大小, 非常的轻量.
+容器通过一个类构造器来识别和注入他的依赖项.InversifyJS 的API接口非常优惠，并鼓励使用面向对象和IOC惯例进行编程.
 
-## Motivation
-JavaScript now supports object oriented (OO) programming with class based inheritance. These features are great but the truth is that they are also
-[dangerous](https://medium.com/@dan_abramov/how-to-use-classes-and-sleep-at-night-9af8de78ccb4).
+## 初衷
+JavaScript 现在已经能够很好的支持面向对象的继承特性. 这些特性设计非常有价值,但同时使用的过程中也相当的
+[危险](https://medium.com/@dan_abramov/how-to-use-classes-and-sleep-at-night-9af8de78ccb4).
 
-We need a good OO design ([SOLID](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)), [Composite Reuse](https://en.wikipedia.org/wiki/Composition_over_inheritance), etc.) to protect ourselves from these threats. The problem is that OO design is difficult and that is exactly why we created InversifyJS.
+我需要一个更好的面向对象设计方法 ([面向对象设计](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)), [合成复用原则](https://en.wikipedia.org/wiki/Composition_over_inheritance), etc.) to protect ourselves from these threats. The problem is that OO design is difficult and that is exactly why we created InversifyJS.
 
-InversifyJS is a tool that helps JavaScript developers to write code with a good OO design.
+InversifyJS 是一个帮助 JavaScript 开发者使用更好地方式进行面向对象程序设计的工具.
 
-## Philosophy
-InversifyJS has been developed with 4 main goals:
+## 信条
+InversifyJS 定制了以下四个目标:
 
-1. Allow JavaScript developers to write code that adheres to the SOLID principles.
+1. 运行 JavaScript 开发者编写遵循 SOLID 原则的代码.
 
-2. Facilitate and encourage the adherence to the best OOP and IoC practices.
+2. 促进并鼓励开发遵守Ioc设计惯例以及最佳的面向对象设计.
 
-3. Add as little runtime overhead as possible.
+3. 尽可能少的增加运行时的额外开销.
 
-4. Provide a [state of the art development experience](https://github.com/inversify/InversifyJS/blob/master/wiki/ecosystem.md).
+4. 提供整套 [最佳实践](https://github.com/inversify/InversifyJS/blob/master/wiki/ecosystem.md).
 
 ## Testimonies
 
