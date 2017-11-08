@@ -41,7 +41,7 @@ InversifyJS 定制了以下四个目标:
 
 4. 提供整套 [最佳实践](https://github.com/inversify/InversifyJS/blob/master/wiki/ecosystem.md).
 
-## Testimonies
+## 证言
 
 **[Nate Kohari](https://twitter.com/nkohari)** - Author of [Ninject](https://github.com/ninject/Ninject)
 
@@ -51,18 +51,17 @@ InversifyJS 定制了以下四个目标:
 **[Michel Weststrate](https://twitter.com/mweststrate)** - Author of [MobX](https://github.com/mobxjs/mobx)
 > *Dependency injection like InversifyJS works nicely*
 
-## Installation
+## 安装
 
-You can get the latest release and the type definitions using npm:
+你可以通过 npm 来获得最新的发行版和类型定义：
 
 ```
 $ npm install inversify reflect-metadata --save
 ```
 
-The InversifyJS type definitions are included in the inversify npm package. 
+Inversify 的 npm 包中已经包含了 InversifyJS 的类型定义.
 
-> :warning: **Important!** InversifyJS requires TypeScript >= 2.0 and the `experimentalDecorators`, `emitDecoratorMetadata`, `types` and `lib` 
-compilation options in your `tsconfig.json` file.
+> :warning: **提示!** InversifyJS 要求 TypeScript >= 2.0 版本,并且需要在项目的 `tsconfig.json` 文件中对 `experimentalDecorators`, `emitDecoratorMetadata`, `types` and `lib` 编译选项进行设置
 
 ```js
 {
@@ -78,16 +77,16 @@ compilation options in your `tsconfig.json` file.
 }
 ```
 
-InversifyJS requires a modern JavaScript engine with support for:
+InversifyJS 要求 JavaScript 引擎能够支持以下特性:
 
 - [Reflect metadata](https://rbuckton.github.io/reflect-metadata/)
 - [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
 - [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) (Only required if using [provider injection](https://github.com/inversify/InversifyJS/blob/master/wiki/provider_injection.md))
 - [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) (Only required if using [activation handlers](https://github.com/inversify/InversifyJS/blob/master/wiki/activation_handler.md))
 
-If your environment don't support one of these you will need to import a shim or polyfill.
+如果你的运行环境中有一个或多个特性无法支持,你需要通过手工导入一个 shim 或者 polyfill.
 
-> :warning: **The `reflect-metadata` polyfill should be imported only once in your entire application** because the Reflect object is mean to be a global singleton. More details about this can be found [here](https://github.com/inversify/InversifyJS/issues/262#issuecomment-227593844).
+> :warning: **`reflect-metadata` polyfill 在你的整个应用程序中仅能够被导入一次** 因为反射对象是一个全局单例. 更多的详细细节可以查看 [这里](https://github.com/inversify/InversifyJS/issues/262#issuecomment-227593844).
 
 Check out the [Environment support and polyfills](https://github.com/inversify/InversifyJS/blob/master/wiki/environment.md)
 page in the wiki and the [Basic example](https://github.com/inversify/inversify-basic-example) to learn more.
