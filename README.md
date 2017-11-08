@@ -88,20 +88,20 @@ InversifyJS 要求 JavaScript 引擎能够支持以下特性:
 
 > :warning: **`reflect-metadata` polyfill 在你的整个应用程序中仅能够被导入一次** 因为反射对象是一个全局单例. 更多的详细细节可以查看 [这里](https://github.com/inversify/InversifyJS/issues/262#issuecomment-227593844).
 
-Check out the [Environment support and polyfills](https://github.com/inversify/InversifyJS/blob/master/wiki/environment.md)
-page in the wiki and the [Basic example](https://github.com/inversify/inversify-basic-example) to learn more.
+你可以在wiki查看 [环境支持与集成](https://github.com/inversify/InversifyJS/blob/master/wiki/environment.md)
+页面和我们提供的[最佳实践案例](https://github.com/inversify/inversify-basic-example) 来了解更多.
 
-## The Basics
-Let’s take a look to the basic usage and APIs of InversifyJS with TypeScript:
+## 基础入门
 
-### Step 1: Declare your interfaces and types
+让我们来看一下通过 TypeScript 来调用 InversifyJS API接口的最基础用法:
 
-Our goal is to write code that adheres to the [dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle). 
-This means that we should "depend upon Abstractions and do not depend upon concretions". 
-Let's start by declaring some interfaces (abstractions).
+### 步骤 1: 创建你的接口和类型
+
+我们的目标是编写一份遵循 [控制反转原则](https://en.wikipedia.org/wiki/Dependency_inversion_principle) 的代码.
+这意味着我们必须 "依赖于抽象接口而非依赖于实现".让我们先来进行一些接口 (抽象) 的声明 .
 
 ```ts
-// file interfaces.ts
+// 文件 interfaces.ts
 
 interface Warrior {
     fight(): string;
@@ -117,10 +117,10 @@ interface ThrowableWeapon {
 }
 ```
 
-InversifyJS need to use the type as identifiers at runtime. We use symbols as identifiers but you can also use classes and or string literals.
+InversifyJS 在运行时需要使用类型作为表示法. 我们可以使用 symbols 作为标示符, 也可以使用类或者字符串.
  
 ```ts
-// file types.ts
+// 文件 types.ts
 
 const TYPES = {
     Warrior: Symbol("Warrior"),
@@ -132,15 +132,16 @@ export { TYPES };
 
 ```
 
-> **Note**: It is recommended to use Symbols but InversifyJS also support the usage of Classes and string literals (please refer to the features section to learn more).
+> **提示**: 一般来说我们建议使用 Symbols , 不过 InversifyJS 也支持使用类或者字符串字面值 (请参阅特征特征介绍部分的章节了解详细信息).
 
-### Step 2: Declare dependencies using the `@injectable` & `@inject` decorators
-Let's continue by declaring some classes (concretions). The classes are implementations of the interfaces that we just declared. All the classes must be annotated with the `@injectable` decorator. 
+### 步骤 2: 通过使用 `@injectable` 和 `@inject` 装饰器（注解）来进行依赖项声明
 
-When a class has a  dependency on an interface we also need to use the `@inject` decorator to define an identifier for the interface that will be available at runtime. In this case we will use the Symbols `Symbol("Weapon")` and `Symbol("ThrowableWeapon")` as runtime identifiers.
+让我们接着来声明一些类（结构）. 这些类会实现我们刚刚定义的接口,所有的类都必须使用 `@injectable` 装饰器进行注释.
+
+当一个类是实现接口后, 我们还需要使用 `@inject` 注解去运行时的依赖.在这个例子中我们使用 Symbols `Symbol("Weapon")` and `Symbol("ThrowableWeapon")` 作为运行标识符.
 
 ```ts
-// file entities.ts
+// 文件 entities.ts
 
 import { injectable, inject } from "inversify";
 import "reflect-metadata";
@@ -183,7 +184,7 @@ class Ninja implements Warrior {
 export { Ninja, Katana, Shuriken };
 ```
 
-If you prefer it you can use property injection instead of constructor injection so you don't have to declare the class constructor:
+如果你喜欢也可以使用属性注入的方式而不是都同个构造函数进行注入,这样可以不必声明构造函数
 
 ```ts
 @injectable()
@@ -195,11 +196,13 @@ class Ninja implements Warrior {
 }
 ```
 
-### Step 3: Create and configure a Container
-We recommend to do this in a file named `inversify.config.ts`. This is the only place in which there is some coupling.
-In the rest of your application your classes should be free of references to other classes.
+### 步骤 3: 创建容器并进行配置
+
+我们建议创建一个名为 `inversify.config.ts` 的文件. 这是在项目中唯一有耦合的地方.
+除此之外的任何地方都不应该包含对其他类的引用！
+
 ```ts
-// file inversify.config.ts
+// 文件 inversify.config.ts
 
 import { Container } from "inversify";
 import TYPES from "./types";
@@ -214,10 +217,12 @@ myContainer.bind<ThrowableWeapon>(TYPES.ThrowableWeapon).to(Shuriken);
 export { myContainer };
 ```
 
-### Step 4: Resolve dependencies
-You can use the method `get<T>` from the `Container` class to resolve a dependency.
-Remember that you should do this only in your [composition root](http://blog.ploeh.dk/2011/07/28/CompositionRoot/)
-to avoid the [service locator anti-pattern](http://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/).
+### 步骤 4: 解析依赖
+
+你可以使用 `Container` 类提供的 `get<T>` 方法去解析依赖.
+记住,你只有在编写 [根目录](http://blog.ploeh.dk/2011/07/28/CompositionRoot/) 时才这么做
+Remember that you should do this only in your
+以此避免出现 [服务定位器反模式](http://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/).
 
 ```ts
 import { myContainer } from "./inversify.config";
@@ -228,13 +233,13 @@ expect(ninja.fight()).eql("cut!"); // true
 expect(ninja.sneak()).eql("hit!"); // true
 ```
 
-As we can see the `Katana` and `Shuriken` were successfully resolved and injected into `Ninja`.
+正如我们所见 `Katana` 和 `Shuriken` 已经被成功的解析和注入到 `Ninja`对象中.
 
-InversifyJS supports ES5 and ES6 and can work without TypeScript.
-Head to the [**JavaScript example**](https://github.com/inversify/InversifyJS/blob/master/wiki/basic_js_example.md) to learn more!
+InversifyJS 也支持没有 TypeScript 的情况下直接在 ES5 和 ES6 中运行.
+转到 [**JavaScript 案例**](https://github.com/inversify/InversifyJS/blob/master/wiki/basic_js_example.md) to learn more!
 
-## The InversifyJS Features and API
-Let's take a look to the InversifyJS features!
+## 以下是 InversifyJS 的功能以及 API 接口
+让我们仔细阅读 InversifyJS 的特性!
 
 - [Support for classes](https://github.com/inversify/InversifyJS/blob/master/wiki/classes_as_id.md)
 - [Support for Symbols](https://github.com/inversify/InversifyJS/blob/master/wiki/symbols_as_id.md)
