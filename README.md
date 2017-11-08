@@ -21,6 +21,7 @@
 ## 介绍
 InversifyJS 是为 Typescript 和 Javascript 编写的一个控制反转 (IoC) 容器, 它仅有 4KB 大小, 非常的轻量.
 容器通过一个类构造器来识别和注入他的依赖项.InversifyJS 的API接口非常优惠，并鼓励使用面向对象和IOC惯例进行编程.
+当前文档为该项目最新版中文文档翻译,切换到([原项目页面](https://github.com/inversify/InversifyJS/))
 
 ## 初衷
 JavaScript 现在已经能够很好的支持面向对象的继承特性. 这些特性设计非常有价值,但同时使用的过程中也相当的
@@ -241,54 +242,55 @@ InversifyJS 也支持没有 TypeScript 的情况下直接在 ES5 和 ES6 中运�
 ## 以下是 InversifyJS 的功能以及 API 接口
 让我们仔细阅读 InversifyJS 的特性!
 
-- [Support for classes](./wiki-cn/classes_as_id.md)
-- [Support for Symbols](./wiki-cn/symbols_as_id.md)
-- [Container API](./wiki-cn/container_api.md)
-- [Declaring container modules](./wiki-cn/container_modules.md)
-- [Container snapshots](./wiki-cn/container_snapshots.md)
-- [Controlling the scope of the dependencies](./wiki-cn/scope.md)
-- [Declaring optional dependencies](./wiki-cn/optional_dependencies.md)
-- [Injecting a constant or dynamic value](./wiki-cn/value_injection.md)
-- [Injecting a class constructor](./wiki-cn/constructor_injection.md)
-- [Injecting a Factory](./wiki-cn/factory_injection.md)
-- [Auto factory](./wiki-cn/auto_factory.md)
-- [Injecting a Provider (asynchronous Factory)](./wiki-cn/provider_injection.md)
-- [Activation handler](./wiki-cn/activation_handler.md)
-- [Post Construct decorator](./wiki-cn/post_construct.md)
-- [Middleware](./wiki-cn/middleware.md)
-- [Multi-injection](./wiki-cn/multi_injection.md)
-- [Tagged bindings](./wiki-cn/tagged_bindings.md)
-- [Create your own tag decorators](./wiki-cn/custom_tag_decorators.md)
-- [Named bindings](./wiki-cn/named_bindings.md)
-- [Default target](./wiki-cn/default_targets.md)
-- [Support for hierarchical DI systems](./wiki-cn/hierarchical_di.md)
-- [Contextual bindings & @targetName](./wiki-cn/contextual_bindings.md)
-- [Property injection](./wiki-cn/property_injection.md)
-- [Circular dependencies](./wiki-cn/circular_dependencies.md)
-- [Inheritance](./wiki-cn/inheritance.md)
+- [对类的支持](./wiki-cn/classes_as_id.md)
+- [对 Symbols 的支持](./wiki-cn/symbols_as_id.md)
+- [容器 API 接口](./wiki-cn/container_api.md)
+- [声明容器模块](./wiki-cn/container_modules.md)
+- [容器快照](./wiki-cn/container_snapshots.md)
+- [依赖项的 scope 作用域管理](./wiki-cn/scope.md)
+- [声明可选属性](./wiki-cn/optional_dependencies.md)
+- [常量或动态值的注入](./wiki-cn/value_injection.md)
+- [类的注入](./wiki-cn/constructor_injection.md)
+- [工厂的注入](./wiki-cn/factory_injection.md)
+- [自动工厂](./wiki-cn/auto_factory.md)
+- [服务提供者的注入 (异步工厂)](./wiki-cn/provider_injection.md)
+- [处理器激活](./wiki-cn/activation_handler.md)
+- [构造器注解](./wiki-cn/post_construct.md)
+- [中间件](./wiki-cn/middleware.md)
+- [多重注入](./wiki-cn/multi_injection.md)
+- [标签绑定](./wiki-cn/tagged_bindings.md)
+- [创建你自己的装饰标签](./wiki-cn/custom_tag_decorators.md)
+- [名称绑定](./wiki-cn/named_bindings.md)
+- [默认标签](./wiki-cn/default_targets.md)
+- [分层依赖注入系统的支持](./wiki-cn/hierarchical_di.md)
+- [上下文绑定 & @targetName](./wiki-cn/contextual_bindings.md)
+- [属性注入](./wiki-cn/property_injection.md)
+- [循环依赖](./wiki-cn/circular_dependencies.md)
+- [继承](./wiki-cn/inheritance.md)
 
-Please refer to the [wiki](./wiki-cn/readme.md) for additional details.
+更多详细内容请参考 [wiki页面](./wiki-cn/readme.md) .
 
-## Ecosystem
-In order to provide a state of the art development experience we are also working on:
+## 生态系统
 
-- [Middleware extensions](./wiki-cn/ecosystem.md#extensions).
-- [Development tools](./wiki-cn/ecosystem.md#development-tools).
-- [Examples](./wiki-cn/ecosystem.md#examples).
+我们也在努力为开发提供更多的最佳时间方案:
 
-Please refer to the [ecosystem wiki page](./wiki-cn/ecosystem.md) to learn more.
+- [中间件扩展](./wiki-cn/ecosystem.md#extensions).
+- [开发工具集](./wiki-cn/ecosystem.md#development-tools).
+- [项目案例](./wiki-cn/ecosystem.md#examples).
 
-## Support
+请查看Wiki的 [生态系统页面](./wiki-cn/ecosystem.md) to learn more.
+
+## 支持
 If you are experience any kind of issues we will be happy to help. You can report an issue using the [issues page](https://github.com/inversify/InversifyJS/issues) or the [chat](https://gitter.im/inversify/InversifyJS). You can also ask questions at [Stack overflow](http://stackoverflow.com/tags/inversifyjs) using the `inversifyjs` tag.
 
 If you want to share your thoughts with the development team or join us you will be able to do so using the [official the mailing list](https://groups.google.com/forum/#!forum/inversifyjs). You can check out the
 [wiki](./wiki-cn/readme.md) to learn more about InversifyJS internals.
 
-## Acknowledgements
+## 致谢
 
 Thanks a lot to all the [contributors](https://github.com/inversify/InversifyJS/graphs/contributors), all the developers out there using InversifyJS and all those that help us to spread the word by sharing content about InversifyJS online. Without your feedback and support this project would not be possible.
 
-## License
+## 授权
 
 License under the MIT License (MIT)
 
