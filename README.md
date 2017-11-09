@@ -278,7 +278,7 @@ InversifyJS 也支持没有 TypeScript 的情况下直接在 ES5 和 ES6 中运�
 - [开发工具集](./wiki-cn/ecosystem.md#development-tools).
 - [项目案例](./wiki-cn/ecosystem.md#examples).
 
-请查看Wiki的 [生态系统页面](./wiki-cn/ecosystem.md) to learn more.
+更多信息请阅读 [生态系统页面](./wiki-cn/ecosystem.md) .
 
 ## 支持
 If you are experience any kind of issues we will be happy to help. You can report an issue using the [issues page](https://github.com/inversify/InversifyJS/issues) or the [chat](https://gitter.im/inversify/InversifyJS). You can also ask questions at [Stack overflow](http://stackoverflow.com/tags/inversifyjs) using the `inversifyjs` tag.
