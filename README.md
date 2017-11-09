@@ -250,7 +250,7 @@ InversifyJS 也支持没有 TypeScript 的情况下直接在 ES5 和 ES6 中运�
 - [依赖项的生命周期管理](./wiki-cn/scope.md)
 - [可选依赖项](./wiki-cn/optional_dependencies.md)
 - [常量或动态值的注入](./wiki-cn/value_injection.md)
-- [类的注入](./wiki-cn/constructor_injection.md)
+- [注入类构造器](./wiki-cn/constructor_injection.md)
 - [工厂的注入](./wiki-cn/factory_injection.md)
 - [自动工厂](./wiki-cn/auto_factory.md)
 - [服务提供者的注入 (异步工厂)](./wiki-cn/provider_injection.md)

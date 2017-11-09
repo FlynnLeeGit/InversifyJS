@@ -1,6 +1,6 @@
-# Injecting a class constructor
+# 注入类构造器
 
-Binds an abstraction to a class constructor.
+将一个类构造器绑定到抽象接口
 
 ```ts
 @injectable()
