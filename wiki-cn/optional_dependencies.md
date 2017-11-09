@@ -1,6 +1,6 @@
-# Optional dependencies
+# 可选依赖项
 
-We can declare an optional dependency using the `@optional()` decorator:
+我们可以使用 `@optional()` 注解声明一个可选的依赖项:
 
 ```ts
 @injectable()
@@ -52,21 +52,20 @@ expect(ninja.katana.name).to.eql("Katana");
 expect(ninja.shuriken.name).to.eql("Shuriken");
 ```
 
-In the example we can see how the first time we resolve `Ninja`, its 
-property `shuriken` is undefined because no bindings have been declared
-for `Shuriken` and the property is annotated with the `@optional()` decorator.
+在这个例子中，我们可以看到我们第一次是如何解析 `Ninja` 的, 因为我们没有对 `Shuriken` 的绑定项进行定义, 因此他的 `shuriken` 属性是未定义状态
+并且我们给它加上了 `@optional()` 注解.
 
-After declaring a binding for `Shuriken`:
+之后我们绑定了 `Shuriken`:
 
 ```ts
 container.bind<Shuriken>("Shuriken").to(Shuriken);
 ```
 
-All the resolved instances of `Ninja` will contain an instance of `Shuriken`.
+所有已解析的 `Ninja` 实例都会被包含到 `Shuriken` 里面去.
 
-## Default values
-If a dependency is decorated with the `@optional()` decorator, we will be able to to declare
-a default value just like you can do in any other TypeScript application:
+## 默认值
+
+如果一个依赖项被 `@optional()` 注解进行声明, 就像你在其他的 TypeScript 应用中做的一样,我们能定义一个默认值:
 
 ```ts
 @injectable()

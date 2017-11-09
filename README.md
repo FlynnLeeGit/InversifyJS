@@ -248,7 +248,7 @@ InversifyJS 也支持没有 TypeScript 的情况下直接在 ES5 和 ES6 中运�
 - [容器模块声明](./wiki-cn/container_modules.md)
 - [容器快照](./wiki-cn/container_snapshots.md)
 - [依赖项的生命周期管理](./wiki-cn/scope.md)
-- [声明可选属性](./wiki-cn/optional_dependencies.md)
+- [可选依赖项](./wiki-cn/optional_dependencies.md)
 - [常量或动态值的注入](./wiki-cn/value_injection.md)
 - [类的注入](./wiki-cn/constructor_injection.md)
 - [工厂的注入](./wiki-cn/factory_injection.md)
