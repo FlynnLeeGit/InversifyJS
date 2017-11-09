@@ -1,6 +1,6 @@
-# Auto factory
+# 自动工厂
 
-Binds an abstraction to an auto-generated Factory.
+将抽象接口绑定到自动生成的工厂.
 
 ```ts
 @injectable()
