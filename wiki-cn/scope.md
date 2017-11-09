@@ -1,6 +1,6 @@
-# Controlling the scope of the dependencies
+# 依赖项的生命周期管理
 
-InversifyJS uses transient scope by default but you can also use singleton and request scope:
+默认情况下 InversifyJS 通过创建临时对象的实现提供依赖, 但你也可以使用单例或者请求声明周期的对象:
 
 ```ts
 container.bind<Shuriken>("Shuriken").to(Shuriken).inTransientScope(); // Default
@@ -8,9 +8,9 @@ container.bind<Shuriken>("Shuriken").to(Shuriken).inSingletonScope();
 container.bind<Shuriken>("Shuriken").to(Shuriken).inRequestScope();
 ```
 
-## About `inSingletonScope`
+## 关于 `inSingletonScope（单例作用域）`
 
-There are many available kinds of bindings:
+以下是若干种可用的绑定方式:
 
 ```ts
 interface BindingToSyntax<T> {
@@ -26,14 +26,14 @@ interface BindingToSyntax<T> {
 }
 ```
 
-In terms of how scope behaves we can group these types of bindings in two main groups:
+关于范围的理解,我们可以分成两组进行解读:
 
-- Bindings that will inject an `object`
-- Bindings that will inject a `function`
+- 绑定给将来进行注入的是一个 `对象（object）`
+- 绑定给将来进行注入的是一个 `函数（function）`
 
-### Bindings that will inject an `object`
+### 绑定给将来进行注入的是一个 `对象（object）`
 
-In this group are included the following types of binding:
+这组绑定方式有以下两种类型:
 
 ```ts
 interface BindingToSyntax<T> {
@@ -44,15 +44,15 @@ interface BindingToSyntax<T> {
 }
 ```
 
-The `inTransientScope` is used by default and we can select the scope of this types of binding, except for `toConstantValue` which will always use `inSingletonScope`.
+`临时作用域范围（inTransientScope）` 是我们能够选择的默认方式, 例如此处 `toConstantValue` 总是使用 `临时作用域范围（inTransientScope）`.
 
-When we invoke `container.get` for the first time and we are using `to`, `toSelf` or `toDynamicValue` the InversifyJS container will try to generate an object instance or value using a constructor or the dynamic value factory. If the scope has been set to `inSingletonScope` the value is cached. The second time we invoke `container.get` for the same resource ID, and if `inSingletonScope` has been selected, InversifyJS will try to get the value from the cache.
+当我们第一次调用调用 `container.get` 方法, 我们使用 `to`, `toSelf` 而不是 `toDynamicValue` , 此时 InversifyJS 对象会尝试去生成一个对象实例或者使用构造函数或者使用动态工厂来进行生成. 如果这个作用域被设置为 `单例（inSingletonScope）` 的话, 该对象将会被缓存. 而我们通过相同的资源ID调用 `container.get` 方法时, 如果选择的是 `inSingletonScope` 方式, InversifyJS 会尝试从缓存中获取依赖项.
 
-Note that a class can have some dependencies and a dynamic value can access other types via the current context. These dependencies may or may not be a singleton independently of the selected scope of their parent object in their respective composition tree,
+注意， 一个类可以有若干的依赖关系，而动态属性值可以根据上下文的其他渠道中获得. 在他们各自的依赖树中，这些依赖项也行并非单例.
 
-### Bindings that will inject a `function`
+### 绑定给将来进行注入的是一个 `函数（function）`
 
-In this group are included the following types of binding:
+这组绑定方式有以下这几种类型:
 
 ```ts
 interface BindingToSyntax<T> {
@@ -64,15 +64,15 @@ interface BindingToSyntax<T> {
 }
 ```
 
-We cannot select the scope of this types of binding because the value to be injected (a factory `function`) is always a singleton. However, the factory internal implementation may or may not return a singleton.
+我们无法选择该类型的绑定作用域范围 (工厂函数 `function`) 总是单例形式. 然而工厂函数的内部实现可以返回单例也可以不是单例.
 
-For example, the following binding will inject a factory which will always be a singleton.
+例如,以下的代码中我们绑定了一个工厂,这个工厂始终都是单例的:
 
 ```ts
 container.bind<interfaces.Factory<Katana>>("Factory<Katana>").toAutoFactory<Katana>("Katana");
 ```
 
-However, the value returned by the factory may or not be a singleton:
+然而,该工厂函数返回的值未必是单例:
 
 ```ts
 container.bind<Katana>("Katana").to(Katana).inTransientScope();
@@ -80,10 +80,10 @@ container.bind<Katana>("Katana").to(Katana).inTransientScope();
 container.bind<Katana>("Katana").to(Katana).inSingletonScope();
 ```
 
-## About `inRequestScope`
+## 关于 `请求作用域（inRequestScope）`
 
-When we use inRequestScope we are using an special kind of singleton.
+inRequestScope 类型是一种特殊的单立刑事.
 
-- The `inSingletonScope` creates a singleton that will last for the entire life cycle of a type binding. This means that the `inSingletonScope` can be cleared up from memory when we unbind a type binding using `container.unbind`.
+- `inSingletonScope` 类型会创建一个单例，这单例在整个类型绑定的声明周期内都有效. This means that the `inSingletonScope` 这意味着我们可以通过使用 `container.unbind` 方法将绑定对象从内存中移除.
 
-- The `inRequestScope` creates a singleton that will last for the entire life cycle of one call to the `contaner.get`, `container.getTagged` or `container.getNamed` methods. Each call to one of this methods will resolve a root dependency and all its sub-dependencies. Internally, a dependency graph known as the "resolution plan" is created by InversifyJS. The `inRequestScope` scope will use one single instance for objects that appear multiple times in the resolution plan. This reduces the number of required resolutions and it can be used as a performance optimization in some cases.
+- `inRequestScope` 会在一次调用 `contaner.get`, `container.getTagged` 或 `container.getNamed` 方法时创建一个单例,直到方法调用结束时销毁. 对其中一个方法的每个调用都将解析一个根依赖项及其所有子依赖项. 在内部维护这一个被 InversifyJS 称之为 "resolution plan" 的依赖关系图 . `inRequestScope` 在一个对象的依赖关系图中将以单例形式出现. 者减少了需要进行解析的次数同时得到了一定的性能提升.

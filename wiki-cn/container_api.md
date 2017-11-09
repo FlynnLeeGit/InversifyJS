@@ -6,7 +6,7 @@ InversifyJS 容器提供了一些针对多重注入和模糊绑定问题的帮�
 
 ### defaultScope(默认作用域)
 
-默认作用域(default scope) 指的是一个 `可变的` 空间,并且你可以在什么绑定时进行制定:
+指的默认情况下提供诸如对象的作用域形式, 一般默认提供的是 `临时` 对象, 但根据需要你也可以在绑定时候指定:
 
 ```ts
 container.bind<Warrior>(TYPES.Warrior).to(Ninja).inSingletonScope();

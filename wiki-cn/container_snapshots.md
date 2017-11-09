@@ -1,6 +1,6 @@
-# Container snapshots
+# 容器快照
 
-Declaring container snapshots is a feature that helps you to write unit tests with ease:
+容器快照能够帮助你非常容易的进行单元测试:
 
 ```ts
 import { expect } from "chai";

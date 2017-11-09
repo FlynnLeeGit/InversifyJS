@@ -1,6 +1,6 @@
-# Declaring container modules
+# 容器模块声明
 
-Container modules can help you to manage the complexity of your bindings in very large applications.
+容器模块可以帮助你在非常复杂的应用中对复杂的依赖关系进行管理.
 
 ```ts
 let warriors = new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind) => {
