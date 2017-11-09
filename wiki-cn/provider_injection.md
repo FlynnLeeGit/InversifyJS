@@ -1,7 +1,7 @@
-# Injecting a Provider (asynchronous Factory)
+# 服务提供者的注入 (异步工厂)
 
-Binds an abstraction to a Provider. A provider is an asynchronous factory, this 
-is useful when dealing with asynchronous  I/O operations.
+为抽象接口绑定一个服务提供者. 服务提供者是一个一步工程, 
+当你需要进行异步的 I/O 业务逻辑时, 它将会非常有用.
 
 ```ts
 type KatanaProvider = () => Promise<Katana>;
@@ -45,8 +45,8 @@ ninja.katanaProvider()
      .catch((e) => { console.log(e); });
 ```
 
-## Provider custom arguments
-The `toProvider` binding expects a `ProviderCreator` as its only argument:
+## 服务提供者自定义参数
+`toProvider` 期望提供一个 `ProviderCreator` 参数,并作为唯一参数:
 
 ```ts
 interface ProviderCreator<T> extends Function {
@@ -54,7 +54,7 @@ interface ProviderCreator<T> extends Function {
 }
 ```
 
-The signature of a provider look as follows:
+服务提供者的声明如下:
 
 ```ts
 interface Provider<T> extends Function {
@@ -62,7 +62,7 @@ interface Provider<T> extends Function {
 }
 ```
 
-These type signatures allow as to pass custom arguments to a provider:
+这些类型的签名允许将自定义参数传递给提供者:
 
 ```ts
 let container = new Container();
@@ -108,9 +108,9 @@ katanaProvider("gold", 10).then((notSoPowerfulGoldKatana) => {
 });
 ```
 
-## Provider partial application
+## 服务提供者部分的应用程序
 
-We can also pass the arguments using partial application:
+我们也可以使用部分的应用程序来进行参数传递:
 
 ```ts
 let container = new Container();
@@ -159,9 +159,9 @@ goldKatanaProvider(10).then((notSoPowerfulGoldKatana) => {
 });
 ```
 
-## Provider as a singleton
-A Provider is always injected as a singleton but you can control if the value returned by the 
-Provider is uses singleton or transient scope:
+## 作为单例使用的服务提供者
+
+服务提供者总是以单例的形式进行注入, 但是你可以控制服务提供者的返回值以单例或者临时对象的形式来提供:
 
 ```ts
 let container = new Container();
@@ -205,8 +205,9 @@ warriorProvider(10).then((warrior2) => {
 });
 ```
 
-## Provider defaults
-The following function can be used as a helper to provide a default value when a provider is rejected:
+## 拒绝提供服务
+
+当一个提供者被拒绝时,下列函数能够被当一个助手来进行使用:
 
 ```ts
 function valueOrDefault<T>(provider: () => Promise<T>, defaultValue: T) {
@@ -220,7 +221,7 @@ function valueOrDefault<T>(provider: () => Promise<T>, defaultValue: T) {
 }
 ```
 
-The following example showcases how to apply the `valueOrDefault` helper:
+下列例子展示了如何使用 `valueOrDefault` 助手:
 
 ```ts
 @injectable()
