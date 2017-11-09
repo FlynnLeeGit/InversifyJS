@@ -1,5 +1,6 @@
-# Injecting a Factory
-Binds an abstraction to a user defined Factory.
+# 工厂的注入
+
+将抽象接口绑定到用户定义的工厂:
 
 ```ts
 @injectable()
@@ -30,7 +31,7 @@ container.bind<interfaces.Factory<Katana>>("Factory<Katana>").toFactory<Katana>(
 });
 ```
 
-You can also define a Factory with args:
+你也可以定义一个带参数的工厂:
 
 ```ts
 container.bind<interfaces.Factory<Weapon>>("Factory<Weapon>").toFactory<Weapon>((context: interfaces.Context) => {
@@ -44,7 +45,7 @@ container.bind<interfaces.Factory<Weapon>>("Factory<Weapon>").toFactory<Weapon>(
 });
 ```
 
-Sometimes you might need to pass arguments to a factory in different moments during the execution:
+有时候在执行过程的不同时刻,你也需要将参数传递给工厂:
 
 ```ts
 container.bind<Engine>("Engine").to(PetrolEngine).whenTargetNamed("petrol");
