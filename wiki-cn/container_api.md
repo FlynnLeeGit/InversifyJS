@@ -293,7 +293,7 @@ expect(values2[1]).to.eq(undefined);
 ```
 
 ## container.resolve<T>(constructor: Newable<T>)
-类似于 `container.get<T>(serviceIdentifier: ServiceIdentifier<T>)` 方法, 但是它允许用户在为什么绑定的情况下创建一个实例:
+类似于 `container.get<T>(serviceIdentifier: ServiceIdentifier<T>)` 方法, 但是它允许用户在未绑定的情况下创建一个实例:
 
 ```ts
 @injectable()
