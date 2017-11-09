@@ -1,28 +1,27 @@
-# The Container API
+# 容器的 API 接口
 
-The InversifyJS container provides some helpers to resolve multi-injections
-and ambiguous bindings.
+InversifyJS 容器提供了一些针对多重注入和模糊绑定问题的帮助.
 
-## Container Options
+## 容器配置选项
 
-### defaultScope
+### defaultScope(默认作用域)
 
-The default scope is `transient` and you can change the scope of a type when declaring a binding:
+默认作用域(default scope) 指的是一个 `可变的` 空间,并且你可以在什么绑定时进行制定:
 
 ```ts
 container.bind<Warrior>(TYPES.Warrior).to(Ninja).inSingletonScope();
 container.bind<Warrior>(TYPES.Warrior).to(Ninja).inTransientScope();
 ```
 
-You can use container options to change the default scope used at application level:
+你可以在应用级通过配置容器的构造函数初始参数来改变磨绒作用域:
 
 ```ts
 let container = new Container({ defaultScope: "Singleton" });
 ```
 
-### autoBindInjectable
+### autoBindInjectable(注入对象的自动绑定)
 
-You can use this to activate automatic binding for `@injectable()` decorated classes:
+你可以通过开启该配置项自动绑定被 `@injectable()` 注解装饰器所声明的类:
 
 ```ts
 let container = new Container({ autoBindInjectable: true });
@@ -31,7 +30,7 @@ container.get(Ninja);              // returns a Ninja
 container.isBound(Ninja);          // returns true
 ```
 
-Manually defined bindings will take precedence:
+手动绑定的优先级高于自动绑定:
 
 ```ts
 let container = new Container({ autoBindInjectable: true });
@@ -41,7 +40,7 @@ container.get(Ninja);              // returns a Samurai
 
 ## Container.merge(a: Container, b: Container)
 
-Merges two containers into one:
+将两个容器合并成为一个容器:
 
 ```ts
 @injectable()
@@ -91,7 +90,7 @@ expect(gameContainer.get<Katana>(JAPAN_EXPANSION_TYPES.Katana).name).to.eql("Kat
 
 ## container.getNamed<T>()
 
-Named bindings:
+名称绑定:
 
 ```ts
 let container = new Container();
@@ -104,7 +103,7 @@ let shuriken = container.getNamed<Weapon>("Weapon", "chinese");
 
 ## container.getTagged<T>()
 
-Tagged bindings:
+标签绑定:
 
 ```ts
 let container = new Container();
@@ -117,7 +116,7 @@ let shuriken = container.getTagged<Weapon>("Weapon", "faction", "ninja");
 
 ## container.getAll<T>()
 
-Get all available bindings for a given identifier:
+获取给定标识符的所有可用绑定:
 
 ```ts
 let container = new Container();
@@ -129,8 +128,8 @@ let weapons = container.getAll<Weapon>("Weapon");  // returns Weapon[]
 
 ## container.getAllNamed<T>()
 
-Get all available bindings for a given identifier that match the given 
-named constraint:
+获取给定标识符的所有有效绑定 
+命名约束:
 
 ```ts
 let container = new Container();
@@ -160,8 +159,8 @@ expect(es[1].goodbye).to.eql("adios");
 
 ## container.getAllTagged<T>()
 
-Get all available bindings for a given identifier that match the given 
-named constraint:
+获取给定标识符的所有可用绑定，匹配给定的给定标识符
+命名约束:
 
 ```ts
 let container = new Container();
@@ -190,7 +189,7 @@ expect(es[1].goodbye).to.eql("adios");
 
 ## container.isBound(serviceIdentifier: ServiceIdentifier)
 
-You can use the `isBound` method to check if there are registered bindings for a given service identifier.
+如果你对标识符进行过绑定或者注册过服务提供者,可用 `isBound` 方法来进行检测.
 
 ```ts
 interface Warrior {}
@@ -222,7 +221,7 @@ container.isBound(katanaSymbol)).eql(false);
 
 ## container.isBoundNamed(serviceIdentifier: ServiceIdentifier<any>, named: string)
 
-You can use the `isBoundNamed` method to check if there are registered bindings for a given service identifier with a given named constraint.
+如果你可用 `isBoundNamed` 方法来进行检测给定的标识符是否进行过名称绑定.
 
 ```ts
 const zero = "Zero";
@@ -247,7 +246,7 @@ expect(container.isBoundNamed(zero, validDivisor)).to.eql(true);
 
 ## container.isBoundTagged(serviceIdentifier: ServiceIdentifier<any>, key: string, value: any)
 
-You can use the `isBoundTagged` method to check if there are registered bindings for a given service identifier with a given tagged constraint.
+如果你可用 `isBoundTagged` 方法来进行检测给定的标识符是否进行过标签绑定.
 
 ```ts
 const zero = "Zero";
@@ -271,8 +270,8 @@ expect(container.isBoundTagged(zero, isValidDivisor, true)).to.eql(true);
 
 ## container.rebind<T>(serviceIdentifier: ServiceIdentifier<T>)
 
-You can use the `rebind` method to replace all the existing bindings for a given `serviceIdentifier`.
-The function returns an instance of `BindingToSyntax` which allows to create the replacement binding.
+我们能够通过 `rebind` 方法去替换一个已经存在的绑定，该方法需要传入一个 `服务标志符（serviceIdentifier）`.
+该函数返回一个 `BindingToSyntax` 实例，该实例可用作创建一个用于替换的绑定.
 
 ```ts
 let TYPES = {
@@ -294,7 +293,7 @@ expect(values2[1]).to.eq(undefined);
 ```
 
 ## container.resolve<T>(constructor: Newable<T>)
-Resolve is like `container.get<T>(serviceIdentifier: ServiceIdentifier<T>)` but it allows users to create an instance when if no bindings have been declared:
+类似于 `container.get<T>(serviceIdentifier: ServiceIdentifier<T>)` 方法, 但是它允许用户在为什么绑定的情况下创建一个实例:
 
 ```ts
 @injectable()
@@ -323,4 +322,4 @@ const ninja = container.resolve(Ninja);
 expect(ninja.fight()).to.eql("cut!");
 ```
 
-Please note that it only allows to skip declaring a binding for the root element in the dependency graph (composition root). All the sub-dependencies (e.g. `Katana` in the preceding example) will require a binding to be declared.
+请注意它仅仅允许跳过依赖关系图中的根节点继续努力绑定 (composition root). 前面所以的依赖项 (e.g. `Katana` 在文章之前的例子中) 都必须对绑定进行声明.
